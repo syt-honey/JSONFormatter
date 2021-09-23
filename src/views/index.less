@@ -1,0 +1,86 @@
+.main__container {
+  display: flex;
+
+  > aside {
+    .main_container-scroll-resize {
+      position: relative;
+      height: calc(100vh - 40px);
+      background: #f9f9f9;
+      box-sizing: border-box;
+
+      .resize-save {
+        position: absolute;
+        top: 0;
+        right: 5px;
+        bottom: 0;
+        left: 0;
+        padding: 10px;
+        overflow-x: hidden;
+      }
+
+      .resize-bar {
+        width: 230px;
+        min-width: 230px;
+        max-width: 340px;
+        height: calc(100vh - 40px);
+        resize: horizontal;
+        cursor: ew-resize;
+        cursor: col-resize;
+        opacity: 0;
+        overflow: scroll;
+        border: 1px solid #eee;
+      }
+
+      /* 拖拽线 */
+      .resize-line {
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        pointer-events: none;
+      }
+
+      .resize-bar:hover ~ .resize-line,
+      .resize-bar:active ~ .resize-line {
+        border-left: 1px dashed skyblue;
+      }
+
+      .resize-bar::-webkit-scrollbar {
+        width: 200px;
+        height: inherit;
+      }
+    }
+
+    /deep/ .el-input__inner {
+      border: none;
+      border-radius: 0;
+      border-bottom: 1px solid #dcdfe6;
+    }
+
+    /deep/ .el-input__prefix {
+      margin: 0;
+    }
+  }
+
+  > main {
+    width: calc(100% - 232px);
+    height: auto;
+    padding: 20px;
+    border-left: 1px solid #eee;
+    box-sizing: border-box;
+
+    .code-title {
+      font-size: 12px;
+      color: #a5a5a5;
+      text-align: end;
+
+      /deep/ .el-icon-success:before {
+        color: #67c23a;
+      }
+
+      /deep/ .el-icon-error:before {
+        color: #f56c6c;
+      }
+    }
+  }
+}
