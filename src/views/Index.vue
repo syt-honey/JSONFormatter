@@ -141,7 +141,7 @@ export default {
      * 获取 node 树
      */
     getTreeNodeList() {
-      this.rawList = JSON.parse(this.textarea);
+      this.rawList = {INPUT_DATA: JSON.parse(this.textarea)};
       this.nodeList = this.$config.cfg_data2tree(
         this.rawList,
         "/",
