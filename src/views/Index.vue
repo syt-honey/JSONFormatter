@@ -103,7 +103,6 @@ export default {
   },
   created() {
     this.theme = getItem("theme") || 'base16-light';
-    console.log(getItem('theme'))
   },
   watch: {
     theme(v) {
