@@ -31,18 +31,32 @@
     <main>
       <div class="code-mirror">
         <codemirror
+        style="font-size : 14px; line-height : 180%;"
           ref="jsonSchema"
           v-model="JSONSchema"
           :options="editorOptions"
         ></codemirror>
       </div>
     </main>
+    <footer>
+      <el-select filterable v-model="theme" placeholder="请选择主题">
+        <el-option
+          v-for="t in options"
+          :key="t"
+          :label="t"
+          :value="t">
+        </el-option>
+      </el-select>
+    </footer>
   </div>
 </template>
 <script>
 import { codemirror } from "vue-codemirror";
 import "codemirror/lib/codemirror.css";
+import "codemirror/theme/base16-light.css";
+import "codemirror/mode/javascript/javascript";
 import tree from "vue-giant-tree";
+import { getItem, setItem } from "@/utils/storage.js"
 
 export default {
   name: "Index",
@@ -54,6 +68,8 @@ export default {
     return {
       rawList: [],
       textarea: "",
+      options: ['default', '3024-day', '3024-night', 'abbott', 'abcdef', 'ambiance', 'ayu-dark', 'ayu-mirage', 'base16-dark', 'base16-light', 'bespin', 'blackboard', 'cobalt', 'colorforth', 'darcula', 'dracula', 'duotone-dark', 'duotone-light', 'eclipse', 'elegant', 'erlang-dark', 'gruvbox-dark', 'hopscotch', 'icecoder', 'idea', 'isotope', 'juejin', 'lesser-dark', 'liquibyte', 'lucario', 'material', 'material-darker', 'material-palenight', 'material-ocean', 'mbo', 'mdn-like', 'midnight', 'monokai', 'moxer', 'neat', 'neo', 'night', 'nord', 'oceanic-next', 'panda-syntax', 'paraiso-dark', 'paraiso-light', 'pastel-on-dark', 'railscasts', 'rubyblue', 'seti', 'shadowfox', 'solarized dark', 'solarized light', 'the-matrix', 'tomorrow-night-bright', 'tomorrow-night-eighties', 'ttcn', 'twilight', 'vibrant-ink', 'xq-dark', 'xq-light', 'yeti', 'yonce', 'zenburn'],
+      theme: "",
       
       // tree 配置
       nodeList: null,
@@ -76,15 +92,28 @@ export default {
       JSONSchema: "{}",
       editorOptions: {
         viewportMargin: Infinity,
-        mode: { name: "javascript", json: true },
+        mode: "application/json",
         lineNumbers: true,
         lineWrapping: true,
         indentWithTabs: false,
         tabSize: 2,
+        theme: "",
       }
     };
   },
+  created() {
+    this.theme = getItem("theme") || 'base16-light';
+    console.log(getItem('theme'))
+  },
   watch: {
+    theme(v) {
+      if (v !== 'default') {
+        require(`codemirror/theme/${v}.css`);
+      }
+
+      this.editorOptions.theme = v;
+      setItem("theme", this.editorOptions.theme);
+    },
     textarea() {
       this.getTreeNodeList();
     }

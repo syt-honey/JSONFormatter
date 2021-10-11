@@ -66,6 +66,7 @@
     width: calc(100% - 232px);
     height: auto;
     padding: 20px;
+    // padding-top: 50px;
     border-left: 1px solid #eee;
     box-sizing: border-box;
 
@@ -81,6 +82,20 @@
       /deep/ .el-icon-error:before {
         color: #f56c6c;
       }
+    }
+  }
+
+  > footer {
+
+    /deep/ .el-select {
+      position: absolute;
+      right: 30px;
+      top: 30px;
+    }
+
+    /deep/ .el-input__inner {
+      height: 32px;
+      line-height: 32px;
     }
   }
 }
