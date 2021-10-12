@@ -4,7 +4,7 @@
       <el-input
         type="textarea"
         :rows="5"
-        placeholder="输入需要格式化的JSON"
+        placeholder="Input the raw JSON..."
         v-model="textarea"
         prefix-icon="el-icon-search"
       >
@@ -38,7 +38,7 @@
       </div>
 
       <footer>
-        <el-select filterable v-model="theme" placeholder="请选择主题">
+        <el-select filterable v-model="theme" placeholder="select theme">
           <el-option
             v-for="t in options"
             :key="t"
@@ -71,7 +71,7 @@ export default {
       options: ['default', '3024-day', '3024-night', 'abbott', 'abcdef', 'ambiance', 'ayu-dark', 'ayu-mirage', 'base16-dark', 'base16-light', 'bespin', 'blackboard', 'cobalt', 'colorforth', 'darcula', 'dracula', 'duotone-dark', 'duotone-light', 'eclipse', 'elegant', 'erlang-dark', 'gruvbox-dark', 'hopscotch', 'icecoder', 'idea', 'isotope', 'juejin', 'lesser-dark', 'liquibyte', 'lucario', 'material', 'material-darker', 'material-palenight', 'material-ocean', 'mbo', 'mdn-like', 'midnight', 'monokai', 'moxer', 'neat', 'neo', 'night', 'nord', 'oceanic-next', 'panda-syntax', 'paraiso-dark', 'paraiso-light', 'pastel-on-dark', 'railscasts', 'rubyblue', 'seti', 'shadowfox', 'solarized dark', 'solarized light', 'the-matrix', 'tomorrow-night-bright', 'tomorrow-night-eighties', 'ttcn', 'twilight', 'vibrant-ink', 'xq-dark', 'xq-light', 'yeti', 'yonce', 'zenburn'],
       theme: "",
       
-      // tree 配置
+      // tree config
       nodeList: null,
       setting: {
         view: {
@@ -88,7 +88,7 @@ export default {
       zTree: null,
       expandNode: [],
       
-      // JSON 配置
+      // JSON config
       JSONSchema: "{}",
       editorOptions: {
         viewportMargin: Infinity,
@@ -119,10 +119,10 @@ export default {
   },
   methods: {
     /**
-     * 点击节点进行的操作
+     * click the node to execute
      */
     onClick(evt, treeId, treeNode) {
-      // 点的不是第一个结点时，把第一个结点的 “点击” 样式 remove 掉
+      // if the clicked node is not the first node, remove the clicked class of the first node
       if (!(treeNode.isFirstNode && treeNode.level === 0)) {
         this.$nextTick(() => {
           const treeDOM = document.getElementsByClassName("ztree")[0];
@@ -143,10 +143,10 @@ export default {
     },
 
     /**
-     * 创建时进行的一些 init 操作
+     * some init operation
      */
     handleCreated(ztreeObj) {
-      // 初始化选中、展开的节点
+      // init selected、expanded node
       this.zTree = ztreeObj;
       ztreeObj.expandAll(true);
       this.$nextTick(() => {
@@ -166,7 +166,7 @@ export default {
     },
 
     /**
-     * 获取 node 树
+     * get node tree
      */
     getTreeNodeList() {
       this.rawList = {INPUT_DATA: JSON.parse(this.textarea)};
@@ -178,7 +178,7 @@ export default {
     },
 
     /**
-     * 根据 content，设置 JSON
+     * config JSON by content
      */
     set(content) {
       this.JSONSchema = JSON.stringify(content, null, 2);

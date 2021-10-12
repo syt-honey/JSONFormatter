@@ -5,7 +5,7 @@ let reqMap = new Map();
 let loading = null;
 
 axios.interceptors.request.use(config => {
-  // 暂时用 url 作为 key。若请求较为复杂（如：多个 post 请求，url 相同但参数不同），则 key 需要将 config.data 一起并入。
+  // use url as the key。If the request is complex, pls use config.data.
   reqMap.set(config.url, config.data);
   if (reqMap.size > 0) {
     loading = Loading.service({ fullscreen: true });
