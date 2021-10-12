@@ -63,10 +63,10 @@
   }
 
   > main {
-    width: calc(100% - 232px);
+    position: relative;
+    flex: 1;
     height: auto;
     padding: 20px;
-    // padding-top: 50px;
     border-left: 1px solid #eee;
     box-sizing: border-box;
 
@@ -85,18 +85,47 @@
     }
   }
 
-  > footer {
-    z-index: 2;
-
-    /deep/ .el-select {
-      position: absolute;
-      right: 30px;
-      top: 30px;
-    }
+  footer {
+    z-index: 3;
+    position: absolute;
+    right: 30px;
+    top: 30px;
 
     /deep/ .el-input__inner {
       height: 32px;
       line-height: 32px;
+    }
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .main__container {
+    flex-direction: column;
+
+    > aside {
+      .main_container-scroll-resize {
+        height: 250px !important;
+
+        .resize-bar {
+          display: none;
+        }
+  
+        /* 拖拽线 */
+        .resize-line {
+          display: none;
+        }
+      }
+    }
+
+    > main {
+      width: 100%;
+      padding: 10px;
+      border-left: none;
+    }
+
+    footer {
+      right: 20px;
+      top: 20px;
     }
   }
 }

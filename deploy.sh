@@ -1,20 +1,19 @@
 # deploy.sh
-# 错误时停止
+# stop operation when an error occurs
 set -e
 
-# 打包
+# build
 yarn build
 
-# 进入目标文件夹
+# go to the target folder
 cd dist
 
-# 提交到本地仓库
-
+# commit to repo
 git init
 git add -A
 git commit -m 'deploy'
 
-# 提交到 项目的 gh-pages 分支
+# push to the target branch
 git push -f git@github.com:syt-honey/JSONFormatter.git master:main
 
 cd -

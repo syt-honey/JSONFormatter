@@ -2,7 +2,6 @@
   <div class="main__container">
     <aside>
       <el-input
-        autofocus
         type="textarea"
         :rows="5"
         placeholder="输入需要格式化的JSON"
@@ -37,17 +36,18 @@
           :options="editorOptions"
         ></codemirror>
       </div>
+
+      <footer>
+        <el-select filterable v-model="theme" placeholder="请选择主题">
+          <el-option
+            v-for="t in options"
+            :key="t"
+            :label="t"
+            :value="t">
+          </el-option>
+        </el-select>
+      </footer>
     </main>
-    <footer>
-      <el-select filterable v-model="theme" placeholder="请选择主题">
-        <el-option
-          v-for="t in options"
-          :key="t"
-          :label="t"
-          :value="t">
-        </el-option>
-      </el-select>
-    </footer>
   </div>
 </template>
 <script>
@@ -193,6 +193,12 @@ export default {
 }
 .CodeMirror-vscrollbar {
   height: auto !important;
+}
+@media screen and (max-width: 580px) {
+  .CodeMirror {
+    height: calc(100vh - 390px) !important;
+    min-height: calc(100vh - 390px) !important;
+  }
 }
 </style>
 
