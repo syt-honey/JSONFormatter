@@ -98,6 +98,7 @@
   }
 }
 
+// mobile adaptation
 @media screen and (max-width: 580px) {
   .main__container {
     flex-direction: column;
@@ -106,11 +107,11 @@
       .main_container-scroll-resize {
         height: 250px !important;
 
+        // hide this module in mobile
         .resize-bar {
           display: none;
         }
-  
-        /* 拖拽线 */
+
         .resize-line {
           display: none;
         }
